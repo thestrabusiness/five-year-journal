@@ -1,0 +1,12 @@
+<h3>Entries for <%= @date.strftime('%b %d')%></h3>
+<%= link_to 'Previous Day', entries_path(date: (@date - 1.day)) %>
+<%= link_to 'Next Day', entries_path(date: (@date + 1.day)) %>
+
+<div class='entries-container'>
+  <% @five_year_dates.each do |date| %>
+    <h2><%= date.strftime('%Y') %></h2>
+    <div class='entry-body'>
+      <%= @entries[date.to_s]&.body %>
+    </div>
+  <% end %>
+</div>
