@@ -1,9 +1,7 @@
 class EntriesController < ApplicationController
   def index
-    @date = DateHelper.new(params[:date]).date
-    @five_year_dates = 5.times.collect{ |i| (@date + (i).years) }
-
-    @entries = policy_scope(Entry).grouped_by_date(@five_year_dates)
+    @date = sanitized_date
+    @entries = policy_scope(Entry).grouped_by_date(current_user.five_year_dates)
   end
 
   def create
@@ -24,5 +22,16 @@ class EntriesController < ApplicationController
 
   def entry_params
     params.require(:entry).permit(:id, :body)
+  end
+
+  def sanitized_date
+    date = DateHelper.new(params[:date]).date
+
+    if date < current_user.start_date
+      params[:date] = ''
+      Date.current
+    else
+      date
+    end
   end
 end

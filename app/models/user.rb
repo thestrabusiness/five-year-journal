@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def start_year
     start_date.strftime('%Y')
   end
+
+  def five_year_dates
+    5.times.collect { |i| start_date + i.years}
+  end
 end
