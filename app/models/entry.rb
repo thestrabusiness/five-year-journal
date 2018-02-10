@@ -1,5 +1,8 @@
 class Entry < ApplicationRecord
+  belongs_to :user
+
   validates :body, presence: true
+  validates :user, presence: true
 
   def self.grouped_by_date(date_array)
     entries_hash = where('created_at::DATE IN (?)', date_array).

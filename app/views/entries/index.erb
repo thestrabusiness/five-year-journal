@@ -2,7 +2,7 @@
   <div class='container center'>
     <h3>Entries for <%= @date.strftime('%b %d')%></h3>
     <%= link_to 'Previous Day', entries_path(date: (@date - 1.day)), class: 'float-left' %>
-    <% if params[:date] != Date.current.to_s || params[:date].blank? %>
+    <%  if show_back_to_today_link? %>
       <%= link_to 'Back to Today', entries_path(date: Date.current) %>
     <% end %>
     <%= link_to 'Next Day', entries_path(date: (@date + 1.day)), class: 'float-right' %>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FiveYearJournal</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'landings', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class='text-center'>
+    <div class='landing-container d-flex h-100 p-3 mx-auto flex-column'>
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Five Year Journal</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <%= link_to 'Home', root_path, class: 'nav-link' %>
+            <%= link_to 'Sign Up', new_user_path, class: 'nav-link' %>
+            <%= link_to 'Sign In', new_session_path, class: 'nav-link' %>
+          </nav>
+        </div>
+      </header>
+      <%= yield %>
+      <footer class='mastfoot mt-auto'>
+        <div class='inner'>
+          <p>@thestrabuiness Copyright 2018</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
