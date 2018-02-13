@@ -11,7 +11,8 @@ class UsersController < ApplicationController
       sign_in(@user)
       redirect_to entries_path
     else
-      render :new, layout: 'landings', notice: 'Make sure you fill out all required fields!'
+      flash.now[:danger] = 'Make sure you fill out all required fields!'
+      render :new, layout: 'landings'
     end
   end
 

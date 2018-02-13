@@ -9,14 +9,16 @@ class EntriesController < ApplicationController
     @entry = Entry.new(entry_params)
     @entry.user = current_user
     @entry.save
-    redirect_to entries_path, notice: 'Entry saved!'
+    flash[:success] = 'Entry saved!'
+    redirect_to entries_path
   end
 
   def update
     @entry = Entry.find(params[:id])
     authorize @entry
     @entry.update(entry_params)
-    redirect_to entries_path, notice: 'Entry saved!'
+    flash[:success] = 'Entry saved!'
+    redirect_to entries_path
   end
 
   private
@@ -27,15 +29,8 @@ class EntriesController < ApplicationController
 
   def parsed_date
     date = params[:date].present? ? Date.parse(params[:date]) : Date.current
-
-    if date < current_user.start_date
-      return current_user.start_date
-    end
-
-    if date > current_user.end_date
-      return current_user.end_date
-    end
-
+    return current_user.start_date if date < current_user.start_date
+    return current_user.end_date if date > current_user.end_date
     date
   end
 end

@@ -9,13 +9,15 @@ class SessionsController < ApplicationController
     if sign_in(user)
       redirect_to entries_path
     else
-      render :new, layout: 'landings', notice: 'Invalid email or password.'
+      flash.now[:danger] = 'Invalid email or password'
+      render :new, layout: 'landings'
     end
   end
 
   def destroy
     sign_out
-    redirect_to new_session_path, notice: 'Signed out.'
+    flash[:info] = 'Signed out.'
+    redirect_to new_session_path
   end
 
   private
