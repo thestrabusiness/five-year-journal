@@ -10,11 +10,13 @@
       <%= link_to 'Back to Today', entries_path(date: Date.current) %>
     <% end %>
 
-    <%= link_to 'Next Day', entries_path(date: (@date + 1.day)), class: 'float-right' %>
+    <% unless @date == current_user.end_date %>
+      <%= link_to 'Next Day', entries_path(date: (@date + 1.day)), class: 'float-right' %>
+    <% end %>
   </div>
   <br/>
   <div class='container entries-container'>
-    <% current_user.five_year_dates.each do |date| %>
+    <% @five_year_dates.each do |date| %>
       <h2><%= date.strftime('%Y') %></h2>
       <div class='entry-row'>
        <%= render entry_body_or_form_partial(date), date: date %>
