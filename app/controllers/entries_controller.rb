@@ -1,4 +1,4 @@
-class EntriesController < ApplicationController
+class EntriesController < AuthenticatedController
   def index
     @date = parsed_date
     @five_year_dates = FiveYearDates.get(date: @date, user: current_user)
