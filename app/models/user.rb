@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :password_digest, presence: true
   validates :email, presence: true, uniqueness: true
+  validates :time_zone, presence: true, inclusion: TZInfo::Timezone.all_identifiers
 
   def start_date
     created_at.to_date
