@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def create
     @user = sign_up(user_params)
+    @user.time_zone = cookies[:browser_time_zone] || 'UTC'
 
     if @user.valid?
       sign_in(@user)

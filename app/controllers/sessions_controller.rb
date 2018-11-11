@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user = authenticate_session(session_params)
 
     if sign_in(user)
+      update_user_time_zone
       redirect_to entries_path
     else
       flash.now[:danger] = 'Invalid email or password'
