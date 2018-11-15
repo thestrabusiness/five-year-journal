@@ -1,7 +1,13 @@
-.entry-row {
+.entry-body {
   min-height: 100px;
 }
 
 textarea {
   min-height: 150px;
+}
+
+.entry-header {
+  h2, h3 {
+    display: inline-block;
+  }
 }
